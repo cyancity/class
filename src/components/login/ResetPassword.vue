@@ -1,6 +1,6 @@
 <template>
   <div>
-    byPhone
+    reset-password
   </div>
 </template>
 

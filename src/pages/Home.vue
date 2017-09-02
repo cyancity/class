@@ -9,7 +9,7 @@
       :inputValue="inputValue"
       v-model="placeHolder"
       position="absolute"
-      auto-scroll-to-top top="46px"
+      auto-scroll-to-top top="0px"
       @on-focus="onFocus"
       @on-cancel="onCancel"
       @on-submit="onSubmit"
@@ -24,7 +24,7 @@
 
     <reservation-tab></reservation-tab>
 
-    <course-discount></course-discount>
+    <course-feeds></course-feeds>
 
   </div>
 </template>
@@ -32,14 +32,14 @@
 <script>
 import CourseTab from '../components/course/CourseTab'
 import ReservationTab from '../components/course/ReservationTab'
-import CourseDiscount from '../components/course/CourseDiscount'
+import CourseFeeds from '../components/course/CourseFeeds'
 import {Search, Group, Cell} from 'vux'
 
 export default {
   components: {
     CourseTab,
     ReservationTab,
-    CourseDiscount,
+    CourseFeeds,
     Search,
     Group,
     Cell
