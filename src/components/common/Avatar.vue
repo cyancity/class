@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="avatar-left">
-      <cell is-link>
+      <cell :link="to.path">
         <img :src="avatarUrl" slot="icon">
         <p slot="title">{{userName}}</p>
       </cell>
@@ -17,7 +17,8 @@ export default {
   },
   props: [
     'avatarUrl',
-    'userName'
+    'userName',
+    'to'
   ]
 }
 </script>

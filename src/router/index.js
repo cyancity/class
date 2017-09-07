@@ -7,7 +7,8 @@ import ByPhone from '@/components/login/ByPhone'
 import ResetPassword from '@/components/login/ResetPassword'
 import User from '@/pages/User'
 import UserCourseList from '@/components/user/UserCourseList'
-
+import UserInfo from '@/components/user/UserInfo'
+import UserFollow from '@/components/user/UserFollow'
 Vue.use(Router)
 
 export default new Router({
@@ -46,11 +47,26 @@ export default new Router({
       component: User,
       children: [
         {
+          path: '',
+          name: 'User',
+          component: User
+        },
+        {
           path: 'course/list',
           name: 'UserCourseList',
           component: UserCourseList
         }
       ]
+    },
+    {
+      path: '/user/info',
+      name: 'UserInfo',
+      component: UserInfo
+    },
+    {
+      path: '/user/follow',
+      name: 'UserFollow',
+      component: UserFollow
     }
   ]
 })
