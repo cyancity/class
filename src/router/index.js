@@ -5,9 +5,13 @@ import Login from '@/pages/Login'
 import ByPassword from '@/components/login/ByPassword'
 import ByPhone from '@/components/login/ByPhone'
 import ResetPassword from '@/components/login/ResetPassword'
+import User from '@/pages/User'
+import UserCourseList from '@/components/user/UserCourseList'
+
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -33,6 +37,18 @@ export default new Router({
           path: 'reset',
           name: 'ResetPassword',
           component: ResetPassword
+        }
+      ]
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: User,
+      children: [
+        {
+          path: 'course/list',
+          name: 'UserCourseList',
+          component: UserCourseList
         }
       ]
     }
