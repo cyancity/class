@@ -33,7 +33,7 @@ const user = {
   },
   actions: {
     LoginByUsername ({ commit }, userInfo) {
-      const username  = userInfo.username.trim()
+      const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(res => {
           const data = res.data
@@ -65,6 +65,7 @@ const user = {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
+          removeToken()
           resolve()
         }).catch(error => {
           reject(error)
