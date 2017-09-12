@@ -9,10 +9,13 @@ import ByPassword from '@/components/login/ByPassword'
 import ByPhone from '@/components/login/ByPhone'
 import ResetPassword from '@/components/login/ResetPassword'
 import AuthRedirect from '@/components/login/AuthRedirect'
+
 // Register
 import Register from '@/components/common/Register'
+
 // choose identity
 import Choose from '@/components/common/Choose'
+
 // user router
 import User from '@/pages/User'
 import UserCourseList from '@/components/user/UserCourseList'
@@ -36,7 +39,6 @@ export const constantRouterMap = [
       { path: 'reset', name: 'ResetPassword', component: ResetPassword }
     ]
   },
-  { path: '/choose', name: 'Choose', component: Choose },
   { path: '/authredirect', component: AuthRedirect },
   { path: '/404', component: NotFound },
   { path: '/401', component: Unauthorized },
@@ -59,5 +61,6 @@ export const asyncRouterMap = [
     ]
   },
   { path: '/user/info', name: 'UserInfo', component: UserInfo },
-  { path: '/user/follow', name: 'UserFollow', component: UserFollow }
+  { path: '/user/follow', name: 'UserFollow', component: UserFollow },
+  { path: '/choose', name: 'Choose', component: Choose }
 ]

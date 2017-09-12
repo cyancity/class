@@ -1,8 +1,8 @@
 import fetch from '@/utils/fetch'
 
-export function loginByUsername (username, password) {
+export function loginByPassword (phone, password) {
   const data = {
-    username,
+    phone,
     password
   }
   return fetch({

@@ -2,7 +2,7 @@
   <div>
     <x-header title="登陆"></x-header>
     <group>
-      <x-input title="手机号" type="text" placeholder="请输入手机号码" v-model="phoneNum" is-type="china-mobile" @on-change="change"></x-input>
+      <x-input title="手机号" name="phone" type="tel" :debounce="1000" placeholder="请输入手机号码" v-model="phoneNum" @on-change="change"></x-input>
       <x-input title="密码" v-model="password" type="text" placeholder="请输入密码" @on-enter="enter"></x-input>
       <router-link to="/login/reset">忘记密码</router-link>
       <x-button text="登陆" type="primary" :show-loading="validateLogin" @click.native="login"></x-button>
@@ -23,8 +23,10 @@ export default {
   },
   data () {
     return {
-      phoneNum: '',
-      password: '',
+      loginInfo: {
+        phone: '',
+        password: ''
+      },
       validateLogin: false
     }
   },
@@ -38,6 +40,12 @@ export default {
     login () {
       console.log(this.phoneNum)
       this.validateLogin = true
+      this.$store.dispatch('LoginByPassword', this.loginInfo).then(() => {
+        this.validateLogin = false
+        this.$router.push('/')
+      }).catch(() => {
+        this.validateLogin = false
+      })
     }
   }
 }
