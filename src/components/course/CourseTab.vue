@@ -1,30 +1,22 @@
 <template>
   <div>
-    <group-title>Demo</group-title>
-    <grid :row="3">
-      <grid-item v-for="(item, index) in items" :key="index" :label="item.detail">
-        <img :src="item.url" slot="icon">
-      </grid-item>
-    </grid>
+    <blockquote class="home-quote">
+      <p class="home-title">Demo</p>
+    </blockquote>
+    
+    <div class="home-course">
+      <img src="https://pro.buysellads.com/p/manage/asset/id/58085" alt="">
+    </div>
+
   </div>
 </template>
 
 <script>
-import { Grid, GridItem, GroupTitle } from 'vux'
-
 export default {
   components: {
-    Grid,
-    GridItem,
-    GroupTitle
   },
   data () {
     return {
-      items: [
-        {'url': '../assets/grid_icon.png', 'detail': 'demo'},
-        {'url': '../assets/grid_icon.png', 'detail': 'demo'},
-        {'url': '../assets/grid_icon.png', 'detail': 'demo'}
-      ]
     }
   },
   methods: {
@@ -40,5 +32,21 @@ export default {
   display: block;
   text-align: center;
   color: #666;
+}
+
+.home-course img {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+}
+
+.home-quote {
+  margin: 1em 0 0 0;
+    padding-left: 8px;
+}
+
+.home-title {
+  border-left: 4px solid #43b983;
+  padding-left: 10px;
 }
 </style>

@@ -1,6 +1,12 @@
 <template>
   <div>
     <x-header title="登陆"></x-header>
+
+    <button-tab v-model="demo01">
+      <button-tab-item @on-item-click="consoleIndex()">家长</button-tab-item>
+      <button-tab-item @on-item-click="consoleIndex()">教师</button-tab-item>
+    </button-tab>
+    
     <group>
       <x-input title="手机号" type="text" placeholder="请输入手机号码" v-model="phoneNum" is-type="china-mobile" @on-change="change"></x-input>
       <x-input title="密码" v-model="password" type="text" placeholder="请输入密码" @on-enter="enter"></x-input>
@@ -13,13 +19,15 @@
 </template>
 
 <script>
-import { Group, XHeader, XInput, XButton } from 'vux'
+import { Group, XHeader, XInput, XButton, ButtonTab, ButtonTabItem } from 'vux'
 export default {
   components: {
     Group,
     XHeader,
     XInput,
-    XButton
+    XButton,
+    ButtonTab,
+    ButtonTabItem
   },
   data () {
     return {
