@@ -2,19 +2,23 @@
  * @Author: Li 
  * @Date: 2017-09-03 02:49:48 
  * @Last Modified by: Li-1700x
- * @Last Modified time: 2017-09-03 03:06:10
+ * @Last Modified time: 2017-09-13 22:49:33
  * @Description: 
  */
 <template>
   <div>
-    <group-title>Demo-3</group-title>
-    <div v-for="(info, index) in courseInfo" :key="index" style="background-color:yellow;text-align:center;">
+    <blockquote class="home-quote">
+      <p class="home-title">Demo</p>
+    </blockquote>
+    <div v-for="(info, index) in courseInfo" :key="index">
       <span style="font-size:20px;">Loading</span>
       <x-img :src="info.course_pic" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
-      {{info.course_title}}
-      {{info.course_menber}}
-      {{info.course_quota}}
-      {{info.course_number}}
+      <div class="feeds-info">
+        {{info.course_title}}
+        {{info.course_menber}}
+        {{info.course_quota}}
+        {{info.course_number}}
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +72,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
+@import '../../styles/common'
 
+.feeds-info
+  display: flex
+  font-size 16px
+  line-height 1.6
 </style>

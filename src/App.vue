@@ -12,7 +12,7 @@
         <span slot="label">我的订单</span>
       </tabbar-item>
       
-      <tabbar-item link="/user/info">
+      <tabbar-item link="/user">
         <img slot="icon" src="./assets/icon_nav_msg.png">
         <span slot="label">用户</span>
       </tabbar-item>            

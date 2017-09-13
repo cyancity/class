@@ -43,15 +43,7 @@ export const constantRouterMap = [
   { path: '/404', component: NotFound },
   { path: '/401', component: Unauthorized },
   { path: '/', name: 'Home', component: Home },
-  { path: '/user/info', name: 'UserInfo', component: UserInfo }
-]
-
-export default new Router({
-  mode: 'history',
-  routes: constantRouterMap
-})
-
-export const asyncRouterMap = [
+  { path: '/user/info', name: 'UserInfo', component: UserInfo },
   {
     path: '/user',
     name: 'User',
@@ -60,7 +52,15 @@ export const asyncRouterMap = [
       { path: '', name: 'User', component: User },
       { path: 'course/list', name: 'UserCourseList', component: UserCourseList }
     ]
-  },
+  }
+]
+
+export default new Router({
+  mode: 'history',
+  routes: constantRouterMap
+})
+
+export const asyncRouterMap = [
   { path: '/user/follow', name: 'UserFollow', component: UserFollow },
   { path: '/choose', name: 'Choose', component: Choose }
 ]
