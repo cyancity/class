@@ -56,7 +56,7 @@ export default {
        */
       courseInfo: [
         {
-          'course_pic': 'https://o5omsejde.qnssl.com/demo/test7.jpg',
+          'course_pic': 'https://resa6.hjfile.cn/uploads/595041f7-1d94-4a6c-9661-6a29ef3b35eb.jpg',
           'course_title': 'demo',
           'course_member': '10',
           'course_number': '6',

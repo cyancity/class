@@ -1,11 +1,33 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <tabbar>
+      <tabbar-item link="/">
+        <img slot="icon" src="./assets/icon_nav_button.png">
+        <span slot="label">主页</span>
+      </tabbar-item>
+
+      <tabbar-item link="/login">
+        <img slot="icon" src="./assets/icon_nav_article.png">
+        <span slot="label">我的订单</span>
+      </tabbar-item>
+      
+      <tabbar-item link="/user/info">
+        <img slot="icon" src="./assets/icon_nav_msg.png">
+        <span slot="label">用户</span>
+      </tabbar-item>            
+    </tabbar>
   </div>
 </template>
 
 <script>
+import { Tabbar, TabbarItem } from 'vux'
+
 export default {
+  components: {
+    Tabbar,
+    TabbarItem
+  },
   name: 'app'
 }
 </script>

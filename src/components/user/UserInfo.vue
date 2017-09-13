@@ -40,9 +40,9 @@ export default {
 }
 </script>
 
-<style>
-.cell-avatar {
-  display: block;
-  margin-right: 5px;
-}
+<style lang="stylus" scoped>
+.cell-avatar
+  display: block
+  margin-right: 5px
+
 </style>

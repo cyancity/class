@@ -1,19 +1,20 @@
 <template>
   <div>
+    <img class="banner" src="https://resa6.hjfile.cn/uploads/c241df0f-ddd7-4b74-9b6e-59061f384407.jpg" alt="">
      <!-- main nav -->
     <div class="status-bar">
-      <img src="" alt="">
       <search
+      placeholder="搜课程、老师、入驻机构"
       @result-click="jumpToResult"
       @on-change="getInputValue"
       :inputValue="inputValue"
       v-model="placeHolder"
-      position="absolute"
       auto-scroll-to-top top="0px"
       @on-focus="onFocus"
       @on-cancel="onCancel"
       @on-submit="onSubmit"
-      ref="search"></search>
+      ref="search">
+      </search>
       <!-- 添加cell -->
       <!--<group>-->
         <!--<cell title="cell title" is-link link="/"></cell>-->
@@ -33,7 +34,7 @@
 import CourseTab from '../components/course/CourseTab'
 import ReservationTab from '../components/course/ReservationTab'
 import CourseFeeds from '../components/course/CourseFeeds'
-import {Search, Group, Cell} from 'vux'
+import { Search, Group, Cell } from 'vux'
 
 export default {
   components: {
@@ -47,7 +48,8 @@ export default {
   data () {
     return {
       inputValue: [],
-      placeHolder: 'PlaceHolder'
+      placeHolder: 'PlaceHolder',
+      banner: 'https://resa6.hjfile.cn/uploads/b6a63288-43c0-43a6-a6e3-19686bbb3702.jpg'
     }
   },
   methods: {
@@ -84,6 +86,8 @@ function getResults (val) {
 }
 </script>
 
-<style>
-
+<style lang="stylus" scoped>
+.banner
+  width: 414px
+  height: 129px
 </style>

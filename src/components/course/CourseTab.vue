@@ -5,7 +5,18 @@
     </blockquote>
     
     <div class="home-course">
-      <img src="https://pro.buysellads.com/p/manage/asset/id/58085" alt="">
+      <div>
+        <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990685-760-1408.png" alt="">
+        <p>中小学课程</p>
+      </div>
+      <div>
+        <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990685-489-9422.png" alt="">
+        <p>中小学课程</p>
+      </div>
+      <div>
+        <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990686-381-5062.png" alt="">
+        <p>中小学课程</p>
+      </div>
     </div>
 
   </div>
@@ -27,26 +38,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.grid-center {
-  display: block;
-  text-align: center;
-  color: #666;
-}
-
-.home-course img {
-  border-radius: 50%;
-  height: 60px;
-  width: 60px;
-}
-
-.home-quote {
-  margin: 1em 0 0 0;
-    padding-left: 8px;
-}
-
-.home-title {
-  border-left: 4px solid #43b983;
-  padding-left: 10px;
-}
+<style lang="stylus" scoped>
+@import '../../styles/common'
 </style>

@@ -42,7 +42,8 @@ export const constantRouterMap = [
   { path: '/authredirect', component: AuthRedirect },
   { path: '/404', component: NotFound },
   { path: '/401', component: Unauthorized },
-  { path: '/', name: 'Home', component: Home }
+  { path: '/', name: 'Home', component: Home },
+  { path: '/user/info', name: 'UserInfo', component: UserInfo }
 ]
 
 export default new Router({
@@ -60,7 +61,6 @@ export const asyncRouterMap = [
       { path: 'course/list', name: 'UserCourseList', component: UserCourseList }
     ]
   },
-  { path: '/user/info', name: 'UserInfo', component: UserInfo },
   { path: '/user/follow', name: 'UserFollow', component: UserFollow },
   { path: '/choose', name: 'Choose', component: Choose }
 ]
