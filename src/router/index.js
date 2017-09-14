@@ -16,6 +16,9 @@ import Register from '@/components/common/Register'
 // choose identity
 import Choose from '@/components/common/Choose'
 
+// course
+import CourseList from '@/components/course/CourseList'
+
 // user router
 import User from '@/pages/User'
 import UserCourseList from '@/components/user/UserCourseList'
@@ -43,6 +46,7 @@ export const constantRouterMap = [
   { path: '/404', component: NotFound },
   { path: '/401', component: Unauthorized },
   { path: '/', name: 'Home', component: Home },
+  { path: '/course/list', component: CourseList },
   { path: '/user/info', name: 'UserInfo', component: UserInfo },
   {
     path: '/user',

@@ -5,13 +5,18 @@
       <x-input title="手机号" type="text" v-model="userInfo.phone" placeholder="请输入手机号码"></x-input>
       <div class="captcha">
         <x-input title="验证码" type="text" v-model="userInfo.captcha" placeholder="请输入手机号码"></x-input>
-        <x-button mini="true">
+        <a>
           发送验证码
-        </x-button>
+        </a>
       </div>
       <x-input title="密码" type="text" v-model="userInfo.password " placeholder="请输入手机号码"></x-input>
     </group>
-    <input type="checkbox" placeholder="协议" ref="protocol" checked="false" @click="isAgree">
+    <div class="protocol">
+      <p>
+        <input type="checkbox" ref="protocol" checked="false" @click="isAgree">
+        同意此协议
+      </p>
+    </div>
     <x-button text="注册" type="primary" @click.native="register" disabled="isRegister"></x-button>
   </div>
 </template>
@@ -61,4 +66,9 @@ export default {
     border 1px solid #fff
     background pr-blue
     width 60px
+
+.protocol
+  display flex
+  p
+    margin 0 auto
 </style>

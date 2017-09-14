@@ -6,8 +6,10 @@
     
     <div class="home-course">
       <div>
-        <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990685-760-1408.png" alt="">
-        <p>中小学课程</p>
+        <router-link to="/course/list">
+          <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990685-760-1408.png" alt="">
+          <p>中小学课程</p>
+        </router-link>
       </div>
       <div>
         <img src="https://n1image.hjfile.cn/shetuan/2017-08-29-1503990685-489-9422.png" alt="">

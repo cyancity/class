@@ -1,22 +1,24 @@
 /*
  * @Author: Li 
  * @Date: 2017-09-03 02:48:35 
- * @Last Modified by: Li-1700x
- * @Last Modified time: 2017-09-12 21:27:05
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-09-14 14:07:36
  * @Description: Page for user to find course 
  */
 <template>
   <div>
     <x-header title="找课程"></x-header>
-    <div class="list-item" v-for="(item, index) in lists" :key="index">
-      <x-img :src="info.course_pic" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
-      <h4>{{ item.title }}</h4>
-      <span>{{ item.num }}</span>
-      <span>{{ item.course_member }}</span>
-      <span>{{ item.course_quota }}</span>
-      <p>{{ item.course_price }}</p>
+    <div class="course" v-for="(item, index) in lists" :key="index">
+      <img :src="item.course_pic" width="100%" height="100%">
+      <div class="list-item">
+        <h4>{{ item.title }}</h4>
+        <span class="info-l">{{ item.num }}</span>
+        <span class="info-l">{{ item.course_member }}</span>
+        <span class="info-r">{{ item.course_quota }}</span>
+        <span class="price">{{ item.course_price }}</span>
+      </div>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -30,12 +32,12 @@ export default {
     return {
       lists: [
         {
-          'img': '',
-          'title': '',
-          'num': '',
-          'course_member': '',
-          'course_quota': '',
-          'course_price': ''
+          'course_pic': 'https://resa6.hjfile.cn/uploads/c4e0273a-7cf6-483a-b390-34dea438b1a6.jpg',
+          'title': '课程列表',
+          'num': '1',
+          'course_member': '1',
+          'course_quota': '1',
+          'course_price': '1'
         }
       ]
     }
@@ -51,6 +53,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="stylus" scoped>
+.course
+  img
+  width 100%
+  height 100%
+  .list-item
+    display flex
+    .info-l
+      text-align center
+      padding 0 4px
+      line-height 1.6rem
+      font-size 1rem
+      border-right 2px solid #000
+    .info-r
+    .price
+      font-size 20px
+      color #ecc
 </style>
