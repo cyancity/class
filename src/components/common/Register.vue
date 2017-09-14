@@ -5,9 +5,9 @@
       <x-input title="手机号" type="text" v-model="userInfo.phone" placeholder="请输入手机号码"></x-input>
       <div class="captcha">
         <x-input title="验证码" type="text" v-model="userInfo.captcha" placeholder="请输入验证码"></x-input>
-        <a class="send" @click="sendCaptcha">
+        <button class="send" @click="sendCaptcha" ref="captcha">
           发送验证码
-        </a>
+        </button>
       </div>
       <x-input title="密码" type="text" v-model="userInfo.password " placeholder="请输入密码"></x-input>
     </group>
@@ -23,7 +23,7 @@
 
 <script>
 import { Group, XHeader, XInput, XButton } from 'vux'
-
+import { setTimer } from '../../utils/index'
 export default {
   components: {
     Group,
@@ -54,8 +54,8 @@ export default {
       this.$refs.protocol.checked
     },
     sendCaptcha () {
-      let sendTime = new Date()
-      console.log(sendTime)
+      let captcha = this.$refs.captcha
+      setTimer(captcha, 60)
       this.$store.dispatch('SendCaptcha', this.userInfo.phone)
     }
   }

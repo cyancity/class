@@ -1,3 +1,18 @@
+export function setTimer (element, time = 60) {
+  let timer = setInterval(() => {
+    time--
+    element.innerHTML = time + '秒后重新获取'
+    element.style.color = '#ccc'
+    element.disabled = 'disabled'
+    if (time === 0) {
+      element.disabled = ''
+      element.style.color = '#ffa600'
+      element.innerHTML = '获取验证码'
+      clearInterval(timer)
+    }
+  }, 1000)
+}
+
 export function paramToObj (url) {
   const search = url.split('?')[1]
   if (!search) {
