@@ -6,6 +6,11 @@ import FastClick from 'fastclick'
 import App from './App'
 import store from './store'
 import * as filters from './filters'
+
+// plugins
+import { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false

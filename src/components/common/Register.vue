@@ -4,12 +4,12 @@
     <group>
       <x-input title="手机号" type="text" v-model="userInfo.phone" placeholder="请输入手机号码"></x-input>
       <div class="captcha">
-        <x-input title="验证码" type="text" v-model="userInfo.captcha" placeholder="请输入手机号码"></x-input>
-        <a>
+        <x-input title="验证码" type="text" v-model="userInfo.captcha" placeholder="请输入验证码"></x-input>
+        <a class="send" @click="sendCaptcha">
           发送验证码
         </a>
       </div>
-      <x-input title="密码" type="text" v-model="userInfo.password " placeholder="请输入手机号码"></x-input>
+      <x-input title="密码" type="text" v-model="userInfo.password " placeholder="请输入密码"></x-input>
     </group>
     <div class="protocol">
       <p>
@@ -17,7 +17,7 @@
         同意此协议
       </p>
     </div>
-    <x-button text="注册" type="primary" @click.native="register" disabled="isRegister"></x-button>
+    <x-button text="注册" type="primary" @click.native="register" :disabled="isRegister"></x-button>
   </div>
 </template>
 
@@ -36,9 +36,9 @@ export default {
       userInfo: {
         phone: '',
         captcha: '',
-        password: '',
-        isRegister: true
-      }
+        password: ''
+      },
+      isRegister: true
     }
   },
   methods: {
@@ -52,6 +52,11 @@ export default {
     },
     isAgree () {
       this.$refs.protocol.checked
+    },
+    sendCaptcha () {
+      let sendTime = new Date()
+      console.log(sendTime)
+      this.$store.dispatch('SendCaptcha', this.userInfo.phone)
     }
   }
 }
@@ -62,11 +67,9 @@ export default {
 .captcha
   display: flex
   .send
-    border-radius 5px
-    border 1px solid #fff
-    background pr-blue
-    width 60px
-
+    display inline-flex
+    align-items center
+    justify-content center
 .protocol
   display flex
   p

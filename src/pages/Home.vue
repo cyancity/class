@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="banner" src="https://resa6.hjfile.cn/uploads/c241df0f-ddd7-4b74-9b6e-59061f384407.jpg" alt="">
+    <img width="100%" height="100%" src="https://resa6.hjfile.cn/uploads/c241df0f-ddd7-4b74-9b6e-59061f384407.jpg">
      <!-- main nav -->
     <div class="status-bar">
       <search

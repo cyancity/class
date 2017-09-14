@@ -1,6 +1,9 @@
-import { loginByPassword, logout, getUserInfo } from '@/api/login'
+import { sendCaptcha, loginByPassword, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-
+// new an vue instance to inject toast plugins in to axios interceptors
+import Vue from 'vue'
+import { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
 const user = {
   state: {
     user: '',
@@ -9,7 +12,8 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    captcha: ''
   },
   mutations: {
     SET_STATUS: (state, status) => {
@@ -29,6 +33,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_CAPTCHA: (state, captcha) => {
+      state.captcha = captcha
     }
   },
   actions: {
@@ -46,7 +53,24 @@ const user = {
         })
       })
     },
-
+    SendCaptcha ({ commit }, data) {
+      console.log(data)
+      let phone = data.trim()
+      return new Promise((resolve, reject) => {
+        sendCaptcha(phone).then(res => {
+          let captcha = res.captcha
+          commit('SET_CAPTCHA', captcha)
+          resolve()
+        }).catch(error => {
+          Vue.$vux.toast.show({
+            text: '操作失败,请稍后重试',
+            type: 'cancel',
+            width: '10em'
+          })
+          reject(error)
+        })
+      })
+    },
     GetUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(res => {

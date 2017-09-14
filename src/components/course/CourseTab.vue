@@ -1,9 +1,9 @@
 <template>
   <div>
     <blockquote class="home-quote">
-      <p class="home-title">Demo</p>
+      <p class="home-title">找课程</p>
     </blockquote>
-    
+
     <div class="home-course">
       <div>
         <router-link to="/course/list">

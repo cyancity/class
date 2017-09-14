@@ -1,5 +1,16 @@
 import fetch from '@/utils/fetch'
 
+export function sendCaptcha (phone) {
+  const telnumber = {
+    phone
+  }
+  return fetch({
+    url: '/sendcode',
+    method: 'post',
+    telnumber
+  })
+}
+
 export function loginByPassword (phone, password) {
   const data = {
     phone,
