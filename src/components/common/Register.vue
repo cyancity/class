@@ -2,34 +2,36 @@
   <div>
     <x-header title="注册"></x-header>
     <group>
-      <x-input title="手机号" type="text" v-model="userInfo.phone" placeholder="请输入手机号码"></x-input>
+      <x-input title="手机号" type="tel" v-model="userInfo.phone" placeholder="请输入手机号码" is-type="china-mobile"></x-input>
       <div class="captcha">
-        <x-input title="验证码" type="text" v-model="userInfo.captcha" placeholder="请输入验证码"></x-input>
+        <x-input title="验证码" type="number" v-model="userInfo.captcha" placeholder="请输入验证码"></x-input>
         <button class="send" @click="sendCaptcha" ref="captcha">
           发送验证码
         </button>
       </div>
-      <x-input title="密码" type="text" v-model="userInfo.password " placeholder="请输入密码"></x-input>
+      <x-input title="密码" type="password" v-model="userInfo.password " placeholder="请输入密码"></x-input>
     </group>
     <div class="protocol">
-      <p>
+      <!-- <p>
         <input type="checkbox" ref="protocol" checked="false" @click="isAgree">
         同意此协议
-      </p>
+      </p> -->
+      <check-icon :value.sync="isAgree">同意此协议</check-icon>
     </div>
     <x-button text="注册" type="primary" @click.native="register" :disabled="isRegister"></x-button>
   </div>
 </template>
 
 <script>
-import { Group, XHeader, XInput, XButton } from 'vux'
+import { Group, XHeader, XInput, XButton, CheckIcon } from 'vux'
 import { setTimer } from '../../utils/index'
 export default {
   components: {
     Group,
     XInput,
     XButton,
-    XHeader
+    XHeader,
+    CheckIcon
   },
   data () {
     return {
@@ -38,21 +40,30 @@ export default {
         captcha: '',
         password: ''
       },
-      isRegister: true
+      isAgree: false
+    }
+  },
+  computed: {
+    isRegister () {
+      // 四项都选中才可以注册
+      if (this.userInfo.phone && this.userInfo.captcha && this.userInfo.password && this.isAgree) {
+        return false
+      }
+      return true
     }
   },
   methods: {
     register () {
-      if (this.isRegister === false) {
+      if (this.isAgree) {
         this.$store.dispatch('register', this.userInfo)
         this.$router.push('/choose')
       } else {
         console.log('error')
       }
     },
-    isAgree () {
-      this.$refs.protocol.checked
-    },
+    // isAgree () {
+    //   this.$refs.protocol.checked
+    // },
     sendCaptcha () {
       let captcha = this.$refs.captcha
       setTimer(captcha, 60)
@@ -72,6 +83,5 @@ export default {
     justify-content center
 .protocol
   display flex
-  p
-    margin 0 auto
+  margin 0 auto
 </style>

@@ -1,13 +1,12 @@
 import fetch from '@/utils/fetch'
 
-export function sendCaptcha (phone) {
-  const telnumber = {
-    phone
-  }
+export function sendCaptcha (telnumber) {
   return fetch({
     url: '/sendcode',
     method: 'post',
-    telnumber
+    params: {
+      telnumber: telnumber
+    }
   })
 }
 

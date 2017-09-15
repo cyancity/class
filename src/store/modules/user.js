@@ -1,5 +1,6 @@
 import { sendCaptcha, loginByPassword, logout, getUserInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import { register } from '@/api/register'
 // new an vue instance to inject toast plugins in to axios interceptors
 import Vue from 'vue'
 import { ToastPlugin } from 'vux'
@@ -58,8 +59,29 @@ const user = {
       let phone = data.trim()
       return new Promise((resolve, reject) => {
         sendCaptcha(phone).then(res => {
-          let captcha = res.captcha
-          commit('SET_CAPTCHA', captcha)
+          console.log(res.data.code)
+          if (res.data.code === '500') {
+            Vue.$vux.toast.show({
+              text: '操作失败,请稍后重试',
+              type: 'cancel',
+              width: '10em'
+            })
+            resolve()
+          }
+          resolve()
+        }).catch(error => {
+          Vue.$vux.toast.show({
+            text: '操作失败,请稍后重试',
+            type: 'cancel',
+            width: '10em'
+          })
+          reject(error)
+        })
+      })
+    },
+    Register ({commit}, data) {
+      return new Promise((resolve, reject) => {
+        register(data).then(res => {
           resolve()
         }).catch(error => {
           Vue.$vux.toast.show({
