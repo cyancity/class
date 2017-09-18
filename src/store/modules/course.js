@@ -5,7 +5,8 @@ Vue.use(ToastPlugin)
 
 const course = {
   state: {
-    homeFeeds: {}
+    homeFeeds: {},
+    args: ''
   },
   mutations: {
     SET_HOMEFEEDS: (state, payload) => {

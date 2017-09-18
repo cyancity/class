@@ -1,23 +1,22 @@
 /*
- * @Author: Li 
- * @Date: 2017-09-03 02:49:48 
+ * @Author: Li
+ * @Date: 2017-09-03 02:49:48
  * @Last Modified by: mikey.zhaopeng
  * @Last Modified time: 2017-09-18 11:27:36
- * @Description: 
+ * @Description:
  */
 <template>
   <div>
     <blockquote class="home-quote">
       <p class="home-title">Demo</p>
     </blockquote>
-    <div v-for="(info, index) in courseInfo" :key="index">
-      <span style="font-size:20px;">Loading</span>
-      <x-img :src="info.course_pic" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
+    <div v-for="(info, index) in feedsInfo" :key="index">
+      <x-img :src="info.image" @on-success="success" @on-error="error" class="ximg-demo" error-class="ximg-error" :offset="-100" container="#vux_view_box_body"></x-img>
       <div class="feeds-info">
-        {{info.course_title}}
-        {{info.course_menber}}
-        {{info.course_quota}}
-        {{info.course_number}}
+        {{info.title}}
+        {{info.max_number}}
+        {{info.surplus_number}}
+        {{info.position}}
       </div>
     </div>
   </div>
@@ -40,39 +39,19 @@ export default {
     error (src, ele, msg) {
       console.log('error load', msg, src)
       const span = ele.parentNode.querySelector('span')
-      span.innerText = 'load error' 
+      span.innerText = 'load error'
     },
     getHomeFeeds () {
       this.$store.dispatch('GetHomeFeeds')
-      this.feedsInfo = this.$store.getters.feedsInfo
+      let feedsInfo = this.$store.state.course
+      this.feedsInfo = feedsInfo.homeFeeds
+      console.log(this.feedsInfo)
     }
   },
   data () {
     return {
-      // Info Content
-      /** @param course_pic       课程背景图片
-       *  @param course_title     课程名称
-       *  @param course_member    课程最大人数
-       *  @param course_number    总课时数
-       *  @param course_location  课程地址
-       *  @param rest_quota       课程剩余名额
-       *  @param price            门店价
-       *  @param real_price       实际付款价格
-       *  @param money_save       优惠数额
-       *  @param discount_percent 优惠比例
-       *  @param discount_percent 优惠比例
-       *  @param pv               浏览数
-       */
       feedsInfo: [
-        {
-          'course_id': 0,
-          'course_title': 'demo',
-          'real_price': 0,
-          'course_member': '10',
-          'course_quota': '3',
-          'course_pic': 'https://resa6.hjfile.cn/uploads/595041f7-1d94-4a6c-9661-6a29ef3b35eb.jpg',
-          'course_number': '6',
-        }
+        {}
       ]
     }
   },

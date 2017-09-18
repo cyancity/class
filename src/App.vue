@@ -1,34 +1,66 @@
 <template>
   <div style="height: 100%">
-    <router-view></router-view>
-    <tabbar class="tabbar">
-      <tabbar-item link="/">
-        <img slot="icon" src="./assets/icon_nav_button.png">
-        <span slot="label">主页</span>
-      </tabbar-item>
+    <div v-transfer-dom>
+      <loading v-model="isLoading"></loading>
+    </div>
+    <div v-transfer-dom>
+      <actionsheet :menus="menus" v-model="showMenu" @on-click-more="clickMore"></actionsheet>
+    </div>
+    <view-box>
+      <router-view style="padding-bottom: 55px"></router-view>
+      <tabbar style="position: fixed">
+        <tabbar-item link="/">
+          <img slot="icon" src="./assets/icon_nav_button.png">
+          <span slot="label">主页</span>
+        </tabbar-item>
 
-      <tabbar-item link="/login">
-        <img slot="icon" src="./assets/icon_nav_article.png">
-        <span slot="label">我的订单</span>
-      </tabbar-item>
+        <tabbar-item link="/login">
+          <img slot="icon" src="./assets/icon_nav_article.png">
+          <span slot="label">我的订单</span>
+        </tabbar-item>
 
-      <tabbar-item link="/user">
-        <img slot="icon" src="./assets/icon_nav_msg.png">
-        <span slot="label">用户</span>
-      </tabbar-item>
-    </tabbar>
+        <tabbar-item link="/user">
+          <img slot="icon" src="./assets/icon_nav_msg.png">
+          <span slot="label">用户</span>
+        </tabbar-item>
+      </tabbar>
+    </view-box>
   </div>
 </template>
 
 <script>
-import { Tabbar, TabbarItem } from 'vux'
+import { Tabbar, TabbarItem, ViewBox, Drawer, Group, Cell, Actionsheet, TransferDom, Loading } from 'vux'
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     Tabbar,
-    TabbarItem
+    TabbarItem,
+    ViewBox,
+    Drawer,
+    Group,
+    Cell,
+    Actionsheet,
+    Loading
   },
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      isLoading: false,
+      showMenu: false,
+      drawerVisibility: false,
+      showModeValue: false,
+      showPlacementValue: '',
+      menus: ''
+    }
+  },
+  methods: {
+    clickMore () {
+      console.log('click')
+    }
+  }
 }
 </script>
 
@@ -39,6 +71,6 @@ body {
   background-color: #fbf9fe;
 }
 .tabbar {
-  position: relative ;
+  position: fixed;
 }
 </style>
