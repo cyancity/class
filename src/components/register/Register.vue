@@ -9,7 +9,6 @@
           发送验证码
         </button>
       </div>
-      <x-input title="密码" type="password" v-model="userInfo.password " placeholder="请输入密码"></x-input>
     </group>
     <div class="protocol">
       <!-- <p>
@@ -46,7 +45,7 @@ export default {
   computed: {
     isRegister () {
       // 四项都选中才可以注册
-      if (this.userInfo.phone && this.userInfo.captcha && this.userInfo.password && this.isAgree) {
+      if (this.userInfo.phone && this.userInfo.captcha && this.isAgree) {
         return false
       }
       return true
@@ -55,15 +54,12 @@ export default {
   methods: {
     register () {
       if (this.isAgree) {
-        this.$store.dispatch('register', this.userInfo)
-        this.$router.push('/choose')
+        this.$store.dispatch('Register', this.userInfo)
+        this.$router.push('/register/pass')
       } else {
         console.log('error')
       }
     },
-    // isAgree () {
-    //   this.$refs.protocol.checked
-    // },
     sendCaptcha () {
       let captcha = this.$refs.captcha
       setTimer(captcha, 60)

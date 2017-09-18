@@ -11,7 +11,8 @@ import ResetPassword from '@/components/login/ResetPassword'
 import AuthRedirect from '@/components/login/AuthRedirect'
 
 // Register
-import Register from '@/components/common/Register'
+import Register from '@/components/register/Register'
+import RegisterPass from '@/components/register/RegisterPass'
 
 // choose identity
 import Choose from '@/components/common/Choose'
@@ -33,6 +34,7 @@ Vue.use(Router)
 
 export const constantRouterMap = [
   { path: '/register', name: 'Register', component: Register },
+  { path: '/register/pass', name: 'RegisterPass', component: RegisterPass },
   { path: '/login',
     name: 'Login',
     component: Login,

@@ -16,7 +16,7 @@ export function loginByPassword (phone, password) {
     password
   }
   return fetch({
-    url: '/api/login',
+    url: '/login',
     method: 'post',
     data
   })
@@ -24,15 +24,26 @@ export function loginByPassword (phone, password) {
 
 export function logout () {
   return fetch({
-    url: '/api/logout',
+    url: '/logout',
     method: 'post'
   })
 }
 
 export function getUserInfo (token) {
   return fetch({
-    url: '/api/user/info',
+    url: '/user/info',
     method: 'post',
     params: { token }
+  })
+}
+
+export function loginByPhone (phone, captcha) {
+  return fetch({
+    url: '/user/tellogin',
+    method: 'post',
+    data: {
+      telnumber: phone,
+      identifyingcode: captcha
+    }
   })
 }

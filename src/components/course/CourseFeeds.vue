@@ -1,8 +1,8 @@
 /*
  * @Author: Li 
  * @Date: 2017-09-03 02:49:48 
- * @Last Modified by: Li-1700x
- * @Last Modified time: 2017-09-13 22:49:33
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-09-18 11:27:36
  * @Description: 
  */
 <template>
@@ -40,7 +40,11 @@ export default {
     error (src, ele, msg) {
       console.log('error load', msg, src)
       const span = ele.parentNode.querySelector('span')
-      span.innerText = 'load error'
+      span.innerText = 'load error' 
+    },
+    getHomeFeeds () {
+      this.$store.dispatch('GetHomeFeeds')
+      this.feedsInfo = this.$store.getters.feedsInfo
     }
   },
   data () {
@@ -57,17 +61,23 @@ export default {
        *  @param money_save       优惠数额
        *  @param discount_percent 优惠比例
        *  @param discount_percent 优惠比例
+       *  @param pv               浏览数
        */
-      courseInfo: [
+      feedsInfo: [
         {
-          'course_pic': 'https://resa6.hjfile.cn/uploads/595041f7-1d94-4a6c-9661-6a29ef3b35eb.jpg',
+          'course_id': 0,
           'course_title': 'demo',
+          'real_price': 0,
           'course_member': '10',
+          'course_quota': '3',
+          'course_pic': 'https://resa6.hjfile.cn/uploads/595041f7-1d94-4a6c-9661-6a29ef3b35eb.jpg',
           'course_number': '6',
-          'course_quota': '3'
         }
       ]
     }
+  },
+  mounted () {
+    this.getHomeFeeds()
   }
 }
 </script>
