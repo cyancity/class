@@ -3,9 +3,6 @@
     <div v-transfer-dom>
       <loading v-model="isLoading"></loading>
     </div>
-    <div v-transfer-dom>
-      <actionsheet :menus="menus" v-model="showMenu" @on-click-more="clickMore"></actionsheet>
-    </div>
     <view-box>
       <router-view style="padding-bottom: 55px"></router-view>
       <tabbar style="position: fixed">

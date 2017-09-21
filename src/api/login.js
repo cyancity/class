@@ -47,3 +47,15 @@ export function loginByPhone (phone, captcha) {
     }
   })
 }
+
+export function resetPassword (payload) {
+  return fetch({
+    url: '/user/pwd/reset',
+    method: 'post',
+    data: {
+      telnumber: payload.phone,
+      password: payload.password,
+      identifyingcode: payload.captcha
+    }
+  })
+}

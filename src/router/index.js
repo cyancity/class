@@ -40,7 +40,7 @@ export const constantRouterMap = [
     component: Login,
     children: [
       { path: '', name: 'ByPassword', component: ByPassword },
-      { path: 'by-phone', name: 'ByPhone', component: ByPhone },
+      { path: 'phone', name: 'ByPhone', component: ByPhone },
       { path: 'reset', name: 'ResetPassword', component: ResetPassword }
     ]
   },

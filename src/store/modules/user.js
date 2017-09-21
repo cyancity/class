@@ -1,4 +1,4 @@
-import { sendCaptcha, loginByPassword, logout, getUserInfo, loginByPhone } from '@/api/login'
+import { sendCaptcha, loginByPassword, logout, getUserInfo, loginByPhone, resetPassword } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { register } from '@/api/register'
 // new an vue instance to inject toast plugins in to axios interceptors
@@ -102,6 +102,11 @@ const user = {
         loginByPhone(payload).then(res => {
           // 明儿看一下js异常捕获
           // 这里处理返回信息
+          Vue.$vux.toast.show({
+            text: '登录成功',
+            type: 'success',
+            width: '10em'
+          })
           resolve()
         }).catch(error => {
           Vue.$vux.toast.show({
@@ -126,7 +131,6 @@ const user = {
         })
       })
     },
-
     Logout ({ commit, state }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
@@ -136,6 +140,13 @@ const user = {
           resolve()
         }).catch(error => {
           reject(error)
+        })
+      })
+    },
+    ResetPassword ({commit}, payload) {
+      return new Promise((resolve, reject) => {
+        resetPassword(payload).then(() => {
+          commit
         })
       })
     }

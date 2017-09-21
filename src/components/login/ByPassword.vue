@@ -8,7 +8,7 @@
       <x-button text="登陆" type="primary" :show-loading="validateLogin" @click.native="login"></x-button>
     </group>
     <router-link to="register">免费注册</router-link>
-    <router-link to="login/by-phone">手机快捷登陆</router-link>
+    <router-link to="login/phone">手机快捷登陆</router-link>
   </div>
 </template>
 
