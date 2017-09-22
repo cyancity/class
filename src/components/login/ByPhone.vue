@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     isRegister () {
-      // 四项都选中才可以注册
+      // 三项都选中才可以注册
       if (this.userInfo.phone && this.userInfo.captcha && this.isAgree) {
         return false
       }
@@ -54,7 +54,7 @@ export default {
   methods: {
     register () {
       if (this.isAgree) {
-        this.$store.dispatch('TelLogin', this.userInfo)
+        this.$store.dispatch('LoginByPhone', this.userInfo)
         this.$router.push('/register/pass')
       } else {
         console.log('error')

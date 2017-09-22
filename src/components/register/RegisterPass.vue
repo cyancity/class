@@ -6,7 +6,7 @@
       <x-input title="密码" type="password" v-model="userInfo.password " placeholder="请输入密码"></x-input>
       <x-input title="确认密码" type="password" v-model="userInfo.repassword " placeholder="请确认密码"></x-input>
     </group>
-    <x-button text="注册" type="primary" @click.native="postPass" :disabled="isRegister"></x-button>
+    <x-button text="注册" type="primary" @click.native="postPass" :disabled="isFullfill"></x-button>
   </div>
 </template>
 
@@ -33,7 +33,18 @@ export default {
   },
   methods: {
     postPass () {
-      this.$store.dispatch('postPass', 'pass')
+      this.$store.dispatch('Register', this.userInfo)
+    }
+  },
+  computed: {
+    isFullfill () {
+      if (this.userInfo.phone &&
+          this.userInfo.password &&
+          this.userInfo.repassword &&
+          this.userInfo.password === this.userInfo.repassword) {
+        return false
+      }
+      return true
     }
   }
 }

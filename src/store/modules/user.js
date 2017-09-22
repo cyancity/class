@@ -146,7 +146,10 @@ const user = {
     ResetPassword ({commit}, payload) {
       return new Promise((resolve, reject) => {
         resetPassword(payload).then(() => {
-          commit
+          resetPassword(payload)
+          resolve()
+        }).catch(error => {
+          reject(error)
         })
       })
     }
