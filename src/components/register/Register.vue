@@ -54,8 +54,13 @@ export default {
   methods: {
     register () {
       if (this.isAgree) {
-        this.$store.dispatch('Register', this.userInfo)
-        this.$router.push('/register/pass')
+        this.$store.dispatch('Register', this.userInfo).then(res => {
+          console.log(res)
+          this.$router.push('/register/pass')
+        }).catch(error => {
+          alert('err')
+          console.log(error)
+        })
       } else {
         console.log('error')
       }

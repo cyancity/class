@@ -63,14 +63,10 @@ const user = {
       let phone = data.trim()
       return new Promise((resolve, reject) => {
         sendCaptcha(phone).then(res => {
-          console.log(res.data.code)
-          if (res.data.code === '500') {
-            Vue.$vux.toast.show({
-              text: '操作失败,请稍后重试',
-              type: 'cancel',
-              width: '10em'
-            })
-            resolve()
+          if (res.data.code !== '1') {
+            // if code not equal to 1, means that action fails
+            console.log('code error')
+            reject(res.data)
           }
           resolve()
         }).catch(error => {

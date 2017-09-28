@@ -1,9 +1,3 @@
-/*
- * @Author: Li 
- * @Date: 2017-09-03 03:34:32 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2017-09-07 21:21:26
- */
 <template>
   <div>
     <group>
