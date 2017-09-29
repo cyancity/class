@@ -19,7 +19,9 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
   } else {
     if (store.getters.roles.length === 0 ) {
-      store.dispatch('GetUserInfo').then(res =>{
+      let token = getToken()
+      // here double GetUserInfo, bug
+      store.dispatch('GetUserInfo', user, token).then(res =>{
         const roles = res.data.role
         store.dispatch('GetUserInfo', { roles }).then(() => {
           router.addRoutes(store.getters.addRouters)

@@ -29,11 +29,14 @@ export function logout () {
   })
 }
 
-export function getUserInfo (token) {
+export function getUserInfo (userId, token) {
   return fetch({
     url: '/user/info',
     method: 'post',
-    params: { token }
+    data: {
+      identify: userId,
+      token: token
+    }
   })
 }
 

@@ -55,20 +55,43 @@ export default {
     register () {
       if (this.isAgree) {
         this.$store.dispatch('Register', this.userInfo).then(res => {
-          console.log(res)
-          this.$router.push('/register/pass')
+          if (res === 'success') {
+            this.$vux.toast.show({
+              text: '注册成功，请选择身份',
+              type: 'success'
+            })
+            setTimeout(this.$router.push('/choose'), 800)
+          } else {
+            this.$vux.toast.show({
+              text: res.errMsg,
+              type: 'cancel',
+              width: '10em'
+            })
+          }
         }).catch(error => {
-          alert('err')
+          this.$vux.toast.show({
+            text: '操作失败,请稍后重试',
+            type: 'cancel',
+            width: '10em'
+          })
           console.log(error)
         })
       } else {
-        console.log('error')
+        this.$vux.toast.show({
+          text: '请填写完整',
+          type: 'cancel'
+        })
       }
     },
     sendCaptcha () {
       let captcha = this.$refs.captcha
       setTimer(captcha, 60)
-      this.$store.dispatch('SendCaptcha', this.userInfo.phone)
+      this.$store.dispatch('SendCaptcha', this.userInfo.phone).catch(error => {
+        this.$vux.toast.show({
+          text: error,
+          type: 'cancel'
+        })
+      })
     }
   }
 }

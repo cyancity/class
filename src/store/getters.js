@@ -6,6 +6,7 @@ const getters = {
   status: state => state.user.status,
   captcha: state => state.user.captcha,
   phone: state => state.user.phone,
+  userId: state => state.user.userId,
   feedsInfo: state => {
     // 取不到homeFeeds, 只能先取所有,然后在view中取出
     console.log(state.course)

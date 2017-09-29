@@ -7,7 +7,7 @@ import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
 const user = {
   state: {
-    user: '',
+    userId: '',
     status: '',
     code: '',
     token: getToken(),
@@ -15,7 +15,11 @@ const user = {
     avatar: '',
     roles: [],
     captcha: '',
-    phone: ''
+    phone: '',
+    location: '',
+    tag: '',
+    confirmation: '',
+    socialAccount: {}
   },
   mutations: {
     SET_STATUS: (state, status) => {
@@ -30,6 +34,18 @@ const user = {
     SET_NAME: (state, name) => {
       state.name = name
     },
+    SET_USERID: (state, userId) => {
+      state.userId = userId
+    },
+    SET_SOCIALACCOUNT: (state, socialAccount) => {
+      state.socialAccount = socialAccount
+    },
+    SET_CONFIRMATION: (state, confirmation) => {
+      state.confirmation = confirmation
+    },
+    SET_TAG: (state, tag) => {
+      state.tag = tag
+    },
     SET_AVATAR: (state, avatar) => {
       state.avatar = avatar
     },
@@ -41,6 +57,9 @@ const user = {
     },
     SET_PHONE: (state, phone) => {
       state.phone = phone
+    },
+    SET_LOCATION: (state, location) => {
+      state.location = location
     }
   },
   actions: {
@@ -64,31 +83,26 @@ const user = {
       return new Promise((resolve, reject) => {
         sendCaptcha(phone).then(res => {
           if (res.data.code !== '1') {
-            // if code not equal to 1, means that action fails
-            console.log('code error')
-            reject(res.data)
+            reject(res.data.errMsg)
           }
           resolve()
         }).catch(error => {
-          Vue.$vux.toast.show({
-            text: '操作失败,请稍后重试',
-            type: 'cancel',
-            width: '10em'
-          })
-          reject(error)
+          reject('未知错误')
+          console.log(error)
         })
       })
     },
     Register ({commit}, data) {
       return new Promise((resolve, reject) => {
         register(data).then(res => {
-          resolve()
+          if (res.data.code === '3') {
+            setToken(res.data.token)
+            commit('SET_TOKEN', res.data.token)
+            resolve('push')
+          } else {
+            resolve(res.data)
+          }
         }).catch(error => {
-          Vue.$vux.toast.show({
-            text: '操作失败,请稍后重试',
-            type: 'cancel',
-            width: '10em'
-          })
           reject(error)
         })
       })
@@ -96,12 +110,9 @@ const user = {
     LoginByPhone ({commit}, payload) {
       return new Promise((resolve, reject) => {
         loginByPhone(payload).then(res => {
-          // 明儿看一下js异常捕获
-          // 这里处理返回信息
           Vue.$vux.toast.show({
             text: '登录成功',
-            type: 'success',
-            width: '10em'
+            type: 'success'
           })
           resolve()
         }).catch(error => {
@@ -116,14 +127,21 @@ const user = {
     },
     GetUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(res => {
-          const data = res.data
-          commit('SET_ROLES', data.roles)
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          resolve()
-        }).catch(error => {
-          reject(error)
+        let user = state.phone || state.userId
+        getUserInfo(user, state.token).then(res => {
+          // if get success, will commit userinfo, if not, reject res code and msg to components to handle
+          if (res.data.code === 2) {
+            const data = res.data.userinfo
+            commit('SET_USERID', data.user_id)
+            commit('SET_SOCIALACCOUNT', data.socialAccount)
+            commit('SET_TAG', data.tag)
+            commit('SET_LOCATION', data.location)
+            commit('SET_ROLES', data.identity)
+            commit('SET_NAME', data.real_name)
+            commit('SET_AVATAR', data.head_image)
+            resolve()
+          }
+          reject(res)
         })
       })
     },

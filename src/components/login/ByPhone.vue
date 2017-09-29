@@ -63,7 +63,12 @@ export default {
     sendCaptcha () {
       let captcha = this.$refs.captcha
       setTimer(captcha, 60)
-      this.$store.dispatch('SendCaptcha', this.userInfo.phone)
+      this.$store.dispatch('SendCaptcha', this.userInfo.phone).catch(error => {
+        this.$vux.toast.show({
+          text: error,
+          type: 'cancel'
+        })
+      })
     }
   }
 }
