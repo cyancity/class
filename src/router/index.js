@@ -15,7 +15,7 @@ import Register from '@/components/register/Register'
 import RegisterPass from '@/components/register/RegisterPass'
 
 // choose identity
-import Choose from '@/components/common/Choose'
+import Choose from '@/components/login/SelectIdentity'
 
 // course
 import CourseList from '@/components/course/CourseList'
@@ -33,30 +33,29 @@ import Unauthorized from '@/components/error/401'
 Vue.use(Router)
 
 export const constantRouterMap = [
-  { path: '/register', name: 'Register', component: Register },
-  { path: '/register/pass', name: 'RegisterPass', component: RegisterPass },
+  { path: '/register', component: Register },
+  { path: '/register/pass', component: RegisterPass },
   { path: '/login',
-    name: 'Login',
     component: Login,
     children: [
-      { path: '', name: 'ByPassword', component: ByPassword },
-      { path: 'phone', name: 'ByPhone', component: ByPhone },
-      { path: 'reset', name: 'ResetPassword', component: ResetPassword }
+      { path: '', component: ByPassword },
+      { path: 'phone', component: ByPhone },
+      { path: 'reset', component: ResetPassword },
+      { path: 'choose', component: Choose }
     ]
   },
   { path: '/authredirect', component: AuthRedirect },
   { path: '/404', component: NotFound },
   { path: '/401', component: Unauthorized },
-  { path: '/', name: 'Home', component: Home },
+  { path: '/', component: Home },
   { path: '/course/list', component: CourseList },
-  { path: '/user/info', name: 'UserInfo', component: UserInfo },
+  { path: '/user/info', component: UserInfo },
   {
     path: '/user',
-    name: 'User',
     component: User,
     children: [
-      { path: '', name: 'User', component: User },
-      { path: 'course/list', name: 'UserCourseList', component: UserCourseList }
+      { path: '', component: User },
+      { path: 'course/list', component: UserCourseList }
     ]
   }
 ]
@@ -67,6 +66,6 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-  { path: '/user/follow', name: 'UserFollow', component: UserFollow },
-  { path: '/choose', name: 'Choose', component: Choose }
+  { path: '/user/follow', component: UserFollow },
+  { path: '/choose', component: Choose }
 ]

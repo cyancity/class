@@ -53,14 +53,14 @@ export default {
   },
   methods: {
     register () {
-      if (this.isAgree) {
+      if (this.isRegister()) {
         this.$store.dispatch('Register', this.userInfo).then(res => {
           if (res === 'success') {
             this.$vux.toast.show({
               text: '注册成功，请选择身份',
               type: 'success'
             })
-            setTimeout(this.$router.push('/choose'), 800)
+            setTimeout(this.$router.push('pass'), 800)
           } else {
             this.$vux.toast.show({
               text: res.errMsg,

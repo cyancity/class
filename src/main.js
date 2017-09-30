@@ -6,7 +6,7 @@ import FastClick from 'fastclick'
 import App from './App'
 import store from './store'
 import * as filters from './filters'
-
+import './permission'
 // plugins
 import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)

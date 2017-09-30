@@ -33,7 +33,9 @@ export default {
   },
   methods: {
     postPass () {
-      this.$store.dispatch('Register', this.userInfo)
+      this.$store.dispatch('Register', this.userInfo).then(() => {
+        this.$router.push('choose')
+      })
     }
   },
   computed: {

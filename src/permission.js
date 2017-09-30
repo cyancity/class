@@ -4,14 +4,16 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
 
-function hasPermission(roles, permissionRoles) {
+function hasPermission (roles, permissionRoles) {
   if (roles.indexOf('admin') >= 0) return true
   if (!permissionRoles) return true
   return roles.some(role => permissionRoles.indexOf(role) >= 0)
 }
 
 const whiteList = [
-  '/login', 
+  '/login',
+  '/register',
+  '/404',
   '/authredirect',
   '/home'
 ]
@@ -22,6 +24,7 @@ router.beforeEach((to, from, next) => {
       next({ path: '/' })
     } else {
       if (store.getters.roles.length === 0) { // judge
+        console.log('getinfo')
         store.dispatch('GetUserInfo').then(res => { // pull user info
           const roles = res.data.role
           store.dispatch('GenerateRoutes', { roles }).then(() => {
@@ -37,15 +40,16 @@ router.beforeEach((to, from, next) => {
         if (hasPermission(store.getters.roles, to.meta.role)) {
           next()
         } else {
-          next({ path: '/401', query: { noGoBack: true }})
+          next({ path: '/401', query: { noGoBack: true } })
         }
       }
     }
   } else {
+    console.log('object')
     if (whiteList.indexOf(to.path) !== -1) { // if to.path in the whiteList, go directly
       next()
     } else {
-      next('/login') // if not all the request will redirect to login page
+      next('/') // if not all the request will redirect to login page
       NProgress.done()
     }
   }
