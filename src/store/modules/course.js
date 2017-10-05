@@ -5,12 +5,14 @@ Vue.use(ToastPlugin)
 
 const course = {
   state: {
-    homeFeeds: {},
+    homeFeeds: [],
     args: ''
   },
   mutations: {
     SET_HOMEFEEDS: (state, payload) => {
-      state.homeFeeds = payload
+      payload.forEach((element) => {
+        state.homeFeeds.push(element)
+      }, this)
     }
   },
   actions: {

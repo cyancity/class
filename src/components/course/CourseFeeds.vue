@@ -1,8 +1,8 @@
 /*
  * @Author: Li
  * @Date: 2017-09-03 02:49:48
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2017-09-18 11:27:36
+ * @Last Modified by: cyancity-mac
+ * @Last Modified time: 2017-10-05 12:06:02
  * @Description:
  */
 <template>
@@ -51,7 +51,6 @@ export default {
   data () {
     return {
       feedsInfo: [
-        {}
       ]
     }
   },

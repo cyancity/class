@@ -7,6 +7,7 @@ import App from './App'
 import store from './store'
 import * as filters from './filters'
 import './permission'
+import './mock'
 // plugins
 import { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)

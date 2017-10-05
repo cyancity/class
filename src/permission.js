@@ -20,19 +20,19 @@ const whiteList = [
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if (getToken()) {
-    if (to.path === 'login') {
+    if (to.path === '/login') {
       next({ path: '/' })
     } else {
       if (store.getters.roles.length === 0) { // judge
-        console.log('getinfo')
         store.dispatch('GetUserInfo').then(res => { // pull user info
-          const roles = res.data.role
+          let roles = store.getters.roles
           store.dispatch('GenerateRoutes', { roles }).then(() => {
             router.addRoutes(store.getters.addRouters) // add routes dynamically
             next({ ...to })
           })
-        }).catch(() => {
-          store.dispatch('FedLogOut').then(() => {
+        }).catch((error) => {
+          console.log(error)
+          store.dispatch('FrontLogOut').then(() => {
             next({ path: '/login' })
           })
         })
@@ -45,7 +45,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    console.log('object')
+    console.log('not get token')
     if (whiteList.indexOf(to.path) !== -1) { // if to.path in the whiteList, go directly
       next()
     } else {

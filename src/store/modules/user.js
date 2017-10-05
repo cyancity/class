@@ -166,6 +166,9 @@ const user = {
           reject(error)
         })
       })
+    },
+    FrontLogOut ({commit}) {
+      return console.log('front log out')
     }
   }
 }
