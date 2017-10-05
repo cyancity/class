@@ -1,6 +1,7 @@
 import { asyncRouterMap, constantRouterMap } from '@/router'
 
 function hasPermission (roles, route) {
+  // judge permission to routes
   if (route.mata && route.meta.role) {
     return roles.some(role => route.meta.role.indexOf(role) >= 0)
   } else {
@@ -9,6 +10,7 @@ function hasPermission (roles, route) {
 }
 
 function filteAsyncRouter (asyncRouterMap, roles) {
+  // if has permission to async routes filter by role and generate accessedRouters
   const accessedRouters = asyncRouterMap.filter(route => {
     if (hasPermission(roles, route)) {
       if (route.children && route.children.length) {
@@ -30,6 +32,7 @@ const permission = {
   mutations: {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
+      // add routes after const routes by user role
       state.routers = constantRouterMap.concat(routers)
     }
   },
@@ -39,8 +42,10 @@ const permission = {
         const { roles } = data
         let accessedRouters
         if (roles.indexOf('admin') >= 0) {
+          // admin can access to any routes
           accessedRouters = asyncRouterMap
         } else {
+          // filter async routes by role
           accessedRouters = filteAsyncRouter(asyncRouterMap, roles)
         }
         commit('SET_ROUTERS', accessedRouters)

@@ -6,3 +6,5 @@ const app = {
     scrollTop: 0
   }
 }
+
+export default app
