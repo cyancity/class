@@ -17,7 +17,7 @@
       </p> -->
       <check-icon :value.sync="isAgree">同意此协议</check-icon>
     </div>
-    <x-button text="注册" type="primary" @click.native="register" :disabled="isRegister"></x-button>
+    <x-button text="注册" type="primary" @click.native="register" :disabled="!isRegister"></x-button>
   </div>
 </template>
 
@@ -36,8 +36,7 @@ export default {
     return {
       userInfo: {
         phone: '',
-        captcha: '',
-        password: ''
+        captcha: ''
       },
       isAgree: false
     }
@@ -46,14 +45,15 @@ export default {
     isRegister () {
       // 四项都选中才可以注册
       if (this.userInfo.phone && this.userInfo.captcha && this.isAgree) {
-        return false
+        return true
       }
-      return true
+      return false
     }
   },
   methods: {
     register () {
-      if (this.isRegister()) {
+      console.log(this.isRegister)
+      if (this.isRegister) {
         this.$store.dispatch('Register', this.userInfo).then(res => {
           if (res === 'success') {
             this.$vux.toast.show({

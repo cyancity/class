@@ -1,6 +1,6 @@
 // import { paramToObj } from '@/utils'
 
-const user = {
+var user = {
   li: {
     code: 2,
     errMsg: 'success',
@@ -34,5 +34,12 @@ export default {
       return Promise.reject('error')
     }
   },
-  logout: () => 'success'
+  logout: () => 'success',
+  register: config => {
+    let post = JSON.parse(config.body)
+    console.log(post)
+    user['li'].code = 3
+    console.log(user['li'])
+    return user['li']
+  }
 }

@@ -1,5 +1,5 @@
 import { sendCaptcha, loginByPassword, logout, getUserInfo, loginByPhone, resetPassword } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, realize } from '@/utils/auth'
 import { register } from '@/api/register'
 // new an vue instance to inject toast plugins in to axios interceptors
 import Vue from 'vue'
@@ -160,7 +160,6 @@ const user = {
     ResetPassword ({commit}, payload) {
       return new Promise((resolve, reject) => {
         resetPassword(payload).then(() => {
-          resetPassword(payload)
           resolve()
         }).catch(error => {
           reject(error)
@@ -169,6 +168,11 @@ const user = {
     },
     FrontLogOut ({commit}) {
       return console.log('front log out')
+    },
+    Realize ({commit}) {
+      return new Promise((resolve, reject) => {
+        realize()
+      })
     }
   }
 }
