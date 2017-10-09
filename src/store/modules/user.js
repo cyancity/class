@@ -1,10 +1,7 @@
 import { sendCaptcha, loginByPassword, logout, getUserInfo, loginByPhone, resetPassword } from '@/api/login'
 import { getToken, setToken, removeToken, realize } from '@/utils/auth'
 import { register } from '@/api/register'
-// new an vue instance to inject toast plugins in to axios interceptors
-import Vue from 'vue'
-import { ToastPlugin } from 'vux'
-Vue.use(ToastPlugin)
+
 const user = {
   state: {
     userId: '',
@@ -63,23 +60,22 @@ const user = {
     }
   },
   actions: {
-    LoginByPassword ({ commit }, userInfo) {
-      console.log(userInfo)
-      const phone = userInfo.phone.trim()
+    LoginByPassword ({ commit }, payload) {
+      console.log(payload)
+      const phone = payload.phone.trim()
       return new Promise((resolve, reject) => {
-        loginByPassword(phone, userInfo.password).then(res => {
-          const data = res.data
-          setToken(data.token)
-          commit('SET_TOKEN', data.token)
+        loginByPassword(phone, payload.password).then(res => {
+          setToken(res.data.token)
+          commit('SET_TOKEN', res.data.token)
           resolve()
         }).catch(error => {
           reject(error)
         })
       })
     },
-    SendCaptcha ({ commit }, data) {
-      console.log(data)
-      let phone = data.trim()
+    SendCaptcha ({ commit }, payload) {
+      console.log(payload)
+      let phone = payload.trim()
       return new Promise((resolve, reject) => {
         sendCaptcha(phone).then(res => {
           if (res.data.code !== '1') {
@@ -92,13 +88,13 @@ const user = {
         })
       })
     },
-    Register ({commit}, data) {
+    Register ({commit}, payload) {
       return new Promise((resolve, reject) => {
-        register(data).then(res => {
-          if (res.data.code === '3') {
+        register(payload).then(res => {
+          if (res.data.code === 3) {
             setToken(res.data.token)
             commit('SET_TOKEN', res.data.token)
-            resolve('push')
+            resolve('success')
           } else {
             resolve(res.data)
           }
@@ -110,17 +106,14 @@ const user = {
     LoginByPhone ({commit}, payload) {
       return new Promise((resolve, reject) => {
         loginByPhone(payload).then(res => {
-          Vue.$vux.toast.show({
-            text: '登录成功',
-            type: 'success'
-          })
-          resolve()
+          if (res.data.code === 2) {
+            setToken(res.data.token)
+            commit('SET_TOKEN', res.data.token)
+            resolve('success')
+          } else {
+            resolve(res.data)
+          }
         }).catch(error => {
-          Vue.$vux.toast.show({
-            text: '操作失败,请稍后重试',
-            type: 'cancel',
-            width: '10em'
-          })
           reject(error)
         })
       })
@@ -159,8 +152,12 @@ const user = {
     },
     ResetPassword ({commit}, payload) {
       return new Promise((resolve, reject) => {
-        resetPassword(payload).then(() => {
-          resolve()
+        resetPassword(payload).then((res) => {
+          if (res.data.code === 3) {
+            resolve('success')
+          } else {
+            resolve(res.data)
+          }
         }).catch(error => {
           reject(error)
         })

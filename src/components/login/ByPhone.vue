@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header title="注册"></x-header>
+    <x-header title="登陆"></x-header>
     <group>
       <x-input title="手机号" type="tel" v-model="userInfo.phone" placeholder="请输入手机号码" is-type="china-mobile"></x-input>
       <div class="captcha">
@@ -10,14 +10,7 @@
         </button>
       </div>
     </group>
-    <div class="protocol">
-      <!-- <p>
-        <input type="checkbox" ref="protocol" checked="false" @click="isAgree">
-        同意此协议
-      </p> -->
-      <check-icon :value.sync="isAgree">同意此协议</check-icon>
-    </div>
-    <x-button text="注册" type="primary" @click.native="register" :disabled="isRegister"></x-button>
+    <x-button text="登陆" type="primary" @click.native="register" :disabled="isRegister"></x-button>
   </div>
 </template>
 
@@ -52,10 +45,36 @@ export default {
     }
   },
   methods: {
-    register () {
-      if (this.isAgree) {
-        this.$store.dispatch('LoginByPhone', this.userInfo)
-        this.$router.push('/register/pass')
+    login () {
+      if (this.isLogin) {
+        this.$store.dispatch('LoginByPhone', this.userInfo).then(res => {
+          if (res === 'success') {
+            this.$vux.toast.show({
+              text: '登录成功',
+              type: 'success'
+            })
+            setTimeout(() => {
+              if (this.$router.history) {
+                this.$router.push('')
+              } else {
+                this.$router.push('/home')
+              }
+              // judge whether has previous history, jump to previous page, if not push to home
+            }, 800);
+          } else {
+            this.$vux.toast.show({
+              text: res.errMsg,
+              type: 'cancel'
+            })
+          }
+        }).catch(error => {
+          console.log(error)
+          this.$vux.toast.show({
+            text: '操作失败,请稍后重试',
+            type: 'cancel',
+            width: '10em'
+          })
+        })
       } else {
         console.log('error')
       }
